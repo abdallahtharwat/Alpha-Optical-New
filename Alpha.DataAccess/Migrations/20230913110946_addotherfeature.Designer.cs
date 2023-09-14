@@ -4,6 +4,7 @@ using Alpha.DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Alpha.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230913110946_addotherfeature")]
+    partial class addotherfeature
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -59,39 +61,6 @@ namespace Alpha.DataAccess.Migrations
                             Id = 3,
                             DisplayOrder = 3,
                             Name = "Strong Light"
-                        });
-                });
-
-            modelBuilder.Entity("Alpha.Models.Models.AboutUs", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Image")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("AboutUs");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Description = "Based in Barcelona, Barner was founded in early 2017 by two friends. After living their lives totally immersed in the digital world, they had identified a problem that was not only affecting them, but millions of people all around the globe: overexposure to blue light. As hard workers and technology lovers, their eyes couldn’t withstand the long hours spent every day in front of screens. They wanted to find a solution that would protect their eyes and improve their quality of life without sacrificing their style. After realizing that current solutions on the market weren’t good enough, they decided to create their own. !",
-                            Image = " ",
-                            Title = " About as"
                         });
                 });
 
@@ -475,39 +444,6 @@ namespace Alpha.DataAccess.Migrations
                             Description = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores voluptatum ab a inventore neque. Tempora?..",
                             Icon = "<i class=\"fa fa-dot-circle fs-2\"></i>",
                             Title = " It adapts to your needs"
-                        });
-                });
-
-            modelBuilder.Entity("Alpha.Models.Models.OurClient", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Image")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ourClients");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Description = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis libero reprehenderit, enim iure debitis doloremque nulla perspiciatis natus impedit obcaecati molestias sunt voluptate sed ipsa?",
-                            Image = " ",
-                            Title = " Clients are happy to do business with us"
                         });
                 });
 

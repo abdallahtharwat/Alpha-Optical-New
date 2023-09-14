@@ -23,6 +23,13 @@ namespace Alpha.DataAccess.Repository.IRepository
         IOrderDetailRepository OrderDetail { get; }
 
         IApplicationUserRepository ApplicationUser { get; }
+        IHeaderRepository  header { get; }
+        IFeatureRepository   Feature { get; }
+        IDetailsSectionRepository    DetailsSection { get; }
+        IOtherFeatureRepository    OtherFeature { get; }
+        IAboutUsRepository    AboutUs { get; }
+        IOurClientRepository    OurClient { get; }
+
 
         void Save();
 

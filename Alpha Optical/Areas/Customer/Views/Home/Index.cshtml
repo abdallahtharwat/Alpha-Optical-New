@@ -1,12 +1,17 @@
-﻿@model IEnumerable<Product>
+﻿@model  HomePageVM
+
+
+@* IEnumerable<Product>*@
 
 
 
 
 
+ @if (Model != null && Model.header != null)
+{
 
-
-    <header class="pb-5 overflow-hidden bg-green">
+    <header class="hero pb-5 overflow-hidden " style="background-image: url('@Model.header.Image.Replace('\\', '/')')">
+   
         <div class="container">
             <div class="row py-5">
                 <div class="col-sm-6 text-lg-start">
@@ -17,8 +22,8 @@
 
             <div class="row">
                 <div class="col-lg-6 text-white text-center text-lg-start">
-                    <h1 class="display-1 fw-normal mt-5">Explore our Products!</h1>
-                <p class="my-4 lead fs-5">Our products play a key role during early life. From supporting healthy growth and development to providing the medical nutrition necessary when health is challenged including growth, cow's milk allergy or premature birth. Some products – those for intractable epilepsy and inherited metabolic disorders – can support children for the rest of their lives.</p>
+                        <h1 class="display-1 text-white fw-normal mt-5">@Model.header.Title</h1>
+                        <p class="my-4 lead fs-5">@Model.header.Description</p>
                   <a href="#product" class="btn btn-green">Explore Now</a>
                 </div>
                 <div class="col-lg-6 phone-img d-none d-lg-flex justify-content-end gx-0 mt-5">
@@ -26,51 +31,59 @@
                 </div>
             </div>
         </div>
+     
     </header>
+
+}
+
+
+
 
     <section id="sec-1" class="py-5 bg-grey">
         <div class="container my-3">
+
+        @if (Model != null && Model.features != null && Model.features.Any())
+        {
             <div class="row">
+
+                @foreach (var item in Model.features)
+                {
                 <div class="col-md-4 text-center sec-1-item mb-5">
                     <span class="d-flex align-items-center justify-content-center mx-auto text-white mb-4 circle-icon">
-                        <i class="far fa-heart fs-3"></i>
-                    </span>
-                    <p class="lead fw-bold">Quality</p>
-                <p class="fw-light mx-3 lh-lg">The best high-quality lenses are made from durable materials and use a series of treatments to help resist scratching and damage, while providing protection from UV rays. Prescription lenses are the best lenses for people who need one kind of vision correction that can be addressed with a single pair of lenses..</p>
+                            @Html.Raw(@item.Icon)
+                        </span>
+                        <p class="lead fw-bold">@item.Title</p>
+                        <p class="fw-light mx-3 lh-lg">@item.Description</p>
                 </div>
-                <div class="col-md-4 text-center sec-1-item mb-5">
-                    <span class="d-flex align-items-center justify-content-center mx-auto text-white mb-4 circle-icon">
-                        <i class="far fa-flag fs-2"></i>
-                    </span>
-                    <p class="lead fw-bold">Reliability</p>
-                <p class="fw-light mx-3 lh-lg"> the probability that a product, system, or service will perform its intended function adequately for a specified period of time, or will operate in a defined environment without failure.</p>
-                </div>
-                <div class="col-md-4 text-center sec-1-item mb-5">
-                    <span class="d-flex align-items-center justify-content-center mx-auto text-white mb-4 circle-icon">
-                        <i class="far fa-star fs-2"></i>
-                    </span>
-                    <p class="lead fw-bold">Delivery speed</p>
-                <p class="fw-light mx-3 lh-lg">t's incredibly convenient. Consumers appreciate the convenience that comes with fast shipping. With same-day or next-day delivery options, customers no longer have to wait days or even weeks for their products to arrive. Instead, they can have their items delivered right to their doorsteps in a matter of hours..</p>
-                </div>
+                }
+
+
             </div>
+            }
         </div>
     </section>
+
+ @if (Model != null && Model.DetailsSection != null)
+{
 
     <section id="sec-2" class="py-5">
         <div class="container my-4">
             <div class="row gx-lg-5">
                 <div class="col-lg-6 mb-5">
-                    <img src="/images/test3.jpg" class="img-fluid">
+                    <img src="@Model.DetailsSection.Image" class="img-fluid">
                 </div>
                 <div class="col-lg-6">
-                    <h3>Our product will amaze you</h3>
-                <p class="text-muted fw-light lh-lg my-4">  We worked long and hard to create the glasses of our dreams, but before launching, we decided to test it out on two crowdfunding platforms: Kickstarter and Indiegogo.!</p>
+                    <h3>@Model.DetailsSection.Title</h3>
+                    <p class="text-muted fw-light lh-lg my-4"> @Model.DetailsSection.Description</p>
                     
                 <a href="#product" class="btn bg-danger"> explore now</a>
                 </div>
             </div>
         </div>
     </section>
+    }
+
+
      <div class="abdo">
          <h1>Featured Glasses</h1>
      </div>
@@ -78,7 +91,7 @@
 
 <section id="product">
     <div class="row pb-3">
-        @foreach (var product in Model)
+        @foreach (var product in Model.products)
         {
             <div class="col-lg-3 col-sm-6">
                 <div class="row p-2">
@@ -141,83 +154,55 @@
                     <p class="lh-lg fw-light pt-2 w-75 mx-auto">Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto, alias a natus deleniti neque ad cupiditate dicta explicabo nemo vel?</p>
                 </div>
             </div>
+        @if (Model != null && Model.features != null && Model.features.Any())
+        {
             <div class="row">
+                @foreach(var item in Model.otherFeatures ) 
+                {
                 <div class="col-lg-6 text-center text-sm-start mb-4">
                     <div class="row">
                         <div class="col-sm-2 d-sm-flex justify-content-sm-end">
                             <span class="d-flex align-items-center justify-content-center circle-icon bg-white text-green mx-sm-0 mx-auto mb-4">
-                                <i class="fa fa-dot-circle fs-2"></i>
+                                @Html.Raw(@item.Icon)
+                                 
                             </span>
                         </div>
                         <div class="col-sm-10">
-                        <h4>It adapts to your needs</h4>
-                            <p class="lh-lg">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores voluptatum ab a inventore neque. Tempora?</p>
+                        <h4>@item.Title</h4>
+                            <p class="lh-lg">@item.Description</p>
                         </div>
                     </div>
                 </div>
+                }
 
-                <div class="col-lg-6 text-center text-sm-start mb-4">
-                    <div class="row">
-                        <div class="col-sm-2 d-sm-flex justify-content-sm-end">
-                            <span class="d-flex align-items-center justify-content-center circle-icon bg-white text-green mx-sm-0 mx-auto mb-4">
-                                <i class="fa fa-cog fs-2"></i>
-                            </span>
-                        </div>
-                        <div class="col-sm-10">
-                        <h4>Quality and good taste</h4>
-                            <p class="lh-lg">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores voluptatum ab a inventore neque. Tempora?</p>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="col-lg-6 text-center text-sm-start mb-4">
-                    <div class="row">
-                        <div class="col-sm-2 d-sm-flex justify-content-sm-end">
-                            <span class="d-flex align-items-center justify-content-center circle-icon bg-white text-green mx-sm-0 mx-auto mb-4">
-                                <i class="fa fa-tv fs-2"></i>
-                            </span>
-                        </div>
-                        <div class="col-sm-10">
-                        <h4>Withstands high temperatures.</h4>
-                            <p class="lh-lg">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores voluptatum ab a inventore neque. Tempora?</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-6 text-center text-sm-start mb-4">
-                    <div class="row">
-                        <div class="col-sm-2 d-sm-flex justify-content-sm-end">
-                            <span class="d-flex align-items-center justify-content-center circle-icon bg-white text-green mx-sm-0 mx-auto mb-4">
-                                <i class="fa fa-crop fs-2"></i>
-                            </span>
-                        </div>
-                        <div class="col-sm-10">
-                            <h4>Pixel Perfect</h4>
-                            <p class="lh-lg">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores voluptatum ab a inventore neque. Tempora?</p>
-                        </div>
-                    </div>
-                </div>
             </div>
+            }
+
         </div>
     </section>
 
+
     <section id="sec-4" class="py-5">
         <div class="container my-4">
+        @if (Model != null && Model.AboutUs != null)
+        {
             <div class="row gx-lg-5">
+
                 <div class="col-lg-6 mb-5">
-                    <h3>About as</h3>
+                    <h3>@Model.AboutUs.Title</h3>
                 <p class="text-muted fw-light lh-lg my-4">
-                    Based in Barcelona, Barner was founded in early 2017 by two friends. After living their lives totally immersed in the digital world, they had identified a problem that was not only affecting them, but millions of people all around the globe: overexposure to blue light.
-                    As hard workers and technology lovers, their eyes couldn’t withstand the long hours spent every day in front of screens. They wanted to find a solution that would protect their eyes and improve their quality of life without sacrificing their style. After realizing that current solutions on the market weren’t good enough, they decided to create their own.
-                    !
+                   @Model.AboutUs.Description
                 </p>
                     <p class="text-muted fw-light lh-lg my-4"></p>
                     <a href="#product" class="btn btn-green">Learn more</a>
                 </div>
                 <div class="col-lg-6">
-                    <img src="/images/section-4-bg.jpg" class="img-fluid">
+                    <img src="@Model.AboutUs.Image" class="img-fluid   ">
                 </div>
+
             </div>
+         }
         </div>
     </section>
 
@@ -262,33 +247,31 @@
         </div>
     </section>
 
+
     <section id="sec-7" class="py-5">
         <div class="container my-4">
+        @if (Model != null && Model.ourClients != null)
+        {
             <div class="row gx-md-5">
+                @foreach(var item in Model.ourClients)
+                {
                 <div class="col-md-6 my-3">
                     <div class="card text-center">
-                        <img class="card-img-top" src="/images/test.webp">
+                        <img class="card-img-top" src="@item.Image">
                         <div class="card-body py-5">
-                            <h4 class="card-title"> Clients are happy to do business with us </h4>
-                            <p class="card-text py-3 lh-lg text-muted fw-light">Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis libero reprehenderit, enim iure debitis doloremque nulla perspiciatis natus impedit obcaecati molestias sunt voluptate sed ipsa?</p>
+                            <h4 class="card-title"> @item.Title </h4>
+                            <p class="card-text py-3 lh-lg text-muted fw-light">@item.Description</p>
                         <a href="#product" class="btn btn-green">Learn more</a>
                         </div>
                     </div>
                 </div>
+                }
 
-                <div class="col-md-6 my-3">
-                    <div class="card text-center">
-                        <img class="card-img-top" src="/images/test1.webp">
-                        <div class="card-body py-5">
-                            <h4 class="card-title">Customer satisfaction is our goal </h4>
-                            <p class="card-text py-3 lh-lg text-muted fw-light">Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis libero reprehenderit, enim iure debitis doloremque nulla perspiciatis natus impedit obcaecati molestias sunt voluptate sed ipsa?</p>
-                            <a href="#product" class="btn btn-green">Learn more</a>
-                        </div>
-                    </div>
-                </div>
             </div>
+            }
         </div>
     </section>
+
 
     <section id="sec-8" class="py-5 bg-grey">
         <div class="container my-4">

@@ -2,6 +2,7 @@
 using Alpha.DataAccess.Repository.IRepository;
 using Alpha.Models;
 using Alpha.Models.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +19,25 @@ namespace Alpha.DataAccess.Repository
             _db = db;
         }
 
-     
+        //public IEnumerable<Product> GetNewProducts(int days)
+        //{
+        //    var currentDate = DateTime.Now;
+        //    var cutoffDate = currentDate.AddDays(5);
+
+        //    return _db.products
+        //        .Where(p => p.CreatedDatee >= cutoffDate)
+        //        .ToList();
+        //}
+
+        //public IEnumerable<Product> GetOldProducts(int days)
+        //{
+        //    var currentDate = DateTime.Now;
+        //    var cutoffDate = currentDate.AddDays(5);
+
+        //    return _db.products
+        //        .Where(p => p.CreatedDatee < cutoffDate)
+        //        .ToList();
+        //}
 
         public void Update(Product obj)
         {
@@ -41,6 +60,9 @@ namespace Alpha.DataAccess.Repository
                 //{
                 //    objFromDb.ImageUrl = obj.ImageUrl;
                 //}
+
+
+
             }
         }
     }

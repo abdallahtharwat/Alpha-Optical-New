@@ -67,6 +67,13 @@ namespace Alpha.Models.Models
         public Lenstype  Lenstype { get; set; }
 
 
+      
+
+
+
+
+
+
     }
 
 }

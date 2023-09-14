@@ -26,6 +26,14 @@ namespace Alpha.DataAccess.Repository
             OrderHeader = new OrderHeaderRepository(_db);
             OrderDetail = new OrderDetailRepository(_db);
             ApplicationUser = new ApplicationUserRepository(_db);
+            header = new HeaderRepository(_db);
+            Feature = new FeatureRepository(_db);   
+            DetailsSection = new DetailsSectionRepository(_db); 
+            OtherFeature = new OtherFeatureRepository(_db);
+            AboutUs = new AboutUsRepository(_db);
+            OurClient = new OurClientRepository(_db);   
+
+
         }
 
 
@@ -44,6 +52,12 @@ namespace Alpha.DataAccess.Repository
         public IOrderHeaderRepository OrderHeader { get; private set; }
         public IOrderDetailRepository OrderDetail { get; private set; }
         public IApplicationUserRepository ApplicationUser { get; private set; }
+        public IHeaderRepository  header { get; private set; }
+        public IFeatureRepository   Feature { get; private set; }
+        public IDetailsSectionRepository    DetailsSection { get; private set; }
+        public IOtherFeatureRepository   OtherFeature { get; private set; }
+        public IAboutUsRepository    AboutUs { get; private set; }
+        public IOurClientRepository    OurClient { get; private set; }
 
         public void Save()
         {

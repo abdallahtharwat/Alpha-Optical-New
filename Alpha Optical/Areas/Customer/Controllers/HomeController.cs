@@ -1,9 +1,11 @@
 ﻿using Alpha.DataAccess.Repository.IRepository;
 using Alpha.Models;
 using Alpha.Models.Models;
+using Alpha.Models.ViewModels;
 using ALpha.Utility;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.VisualBasic;
 using System.Diagnostics;
 using System.Security.Claims;
 
@@ -19,10 +21,98 @@ namespace Alpha_Optical.Areas.Customer.Controllers
             _logger = logger;
             _UnitofWork = UnitofWork;
         }
-        public IActionResult Index()
+        public async Task< IActionResult> Index()
         {
-            IEnumerable<Product> Productlist = _UnitofWork.Product.GetAll(includeproperties: "Category,Brand,Lenstype,productImages");
-            return View(Productlist);
+
+            var product = _UnitofWork.Product.GetAll(includeproperties: "Category,Brand,Lenstype,productImages").Select(u => new Product  // (step 3 for forienkey category)  انت بتحيبها من قاعد البيانات و بتبعتها لل فيو    
+            {
+                Title = u.Title,
+                Description = u.Description,
+                Color = u.Color,
+                ISBN = u.ISBN,
+                ListPrice = u.ListPrice,
+                Price = u.Price,
+                Price5 = u.Price5,
+                Price10 = u.Price10,
+                CategoryId = u.CategoryId,
+                LenstypeId = u.LenstypeId,
+                BrandId = u.BrandId,
+                productImages = u.productImages,
+                Category = u.Category,
+                Brand = u.Brand,
+                Lenstype = u.Lenstype,
+
+                Id = u.Id,
+            });
+
+
+            var q =  await _UnitofWork.header.Getasync();
+
+            var header = new Header   // (step 3 for forienkey category)  انت بتحيبها من قاعد البيانات و بتبعتها لل فيو    
+            {
+                Title = q.Title,
+                Description = q.Description,
+                Id = q.Id,
+                Image = q.Image,
+            };
+
+            var m = await _UnitofWork.AboutUs.Getasync(1);
+
+            //var aboutus = new AboutUs
+            //{
+            //    Title = m.Title,
+            //    Description = m.Description,
+            //    Id = m.Id,
+            //    Image = m.Image,
+            //};
+
+            var z = await _UnitofWork.DetailsSection.Getasync(1);
+
+            var detailsSection = new DetailsSection   // (step 3 for forienkey category)  انت بتحيبها من قاعد البيانات و بتبعتها لل فيو    
+            {
+                Title = z.Title,
+                Description = z.Description,
+                Id = z.Id,
+                Image = z.Image,
+            };
+
+            var features = await _UnitofWork.Feature.GetAllasync();
+             if(features is null)
+             {
+                return NotFound();
+             }
+
+            var otherfeatures = await _UnitofWork.OtherFeature.GetAllasync();
+            if (otherfeatures is null)
+            {
+                return NotFound();
+            }
+
+            var ourclient = await _UnitofWork.OurClient.GetAllasync();
+            if(ourclient is null)
+            {
+                NotFound();
+            }
+
+
+
+
+            HomePageVM headerVM = new()
+            {
+                products = product,
+                header = header,
+                DetailsSection = detailsSection,
+                AboutUs = m,
+                features = features.ToList(),
+                otherFeatures = otherfeatures.ToList(),
+                ourClients = ourclient.ToList(),
+
+            };
+
+
+
+            //IEnumerable<Product> Productlist = _UnitofWork.Product.GetAll(includeproperties: "Category,Brand,Lenstype,productImages");
+            return View(headerVM);
         }
 
         // get 

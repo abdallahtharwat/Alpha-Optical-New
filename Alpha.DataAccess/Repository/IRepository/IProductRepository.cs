@@ -13,7 +13,9 @@ namespace Alpha.DataAccess.Repository.IRepository
 
         void Update(Product obj);
 
-     
+        //IEnumerable<Product> GetNewProducts(int days);
+        //IEnumerable<Product> GetOldProducts(int days);
+
 
     }
 }

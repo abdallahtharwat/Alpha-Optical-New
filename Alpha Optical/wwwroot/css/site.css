@@ -14,6 +14,49 @@ for details on configuring this project to bundle and minify static web assets. 
 
 
 
+
+.hero {
+  /*  background-image: url(/images/m66.jpg);*/
+    background-position:center ;
+    background-size: cover;
+/*    min-height:600px ;*/
+    /* background-attachment: fixed;*/
+    position: relative;
+    z-index: 2;
+}
+
+
+@media ( min-width:600px ) and ( max-width:1000px) {
+}
+
+@media (max-width:650px) {
+    .hero {
+    /*    background-image: url('/images/m6.jpg');*/
+        background-position: center;
+        background-size: cover;
+    }
+}
+
+@media (max-width:300px) {
+}
+
+.hero::after {
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    /* background-color: rgba(21, 20, 51, 0.8); */
+    z-index: -1;
+}
+
+
+
+
+
+
+
 :root {
     --green: #16db93;
     --green-dark: #13bc7e;
